@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/crystalbit/async-delay-planner.svg?branch=master)](https://travis-ci.org/crystalbit/async-delay-planner) [![Coverage Status](https://coveralls.io/repos/github/crystalbit/async-delay-planner/badge.svg?branch=master)](https://coveralls.io/github/crystalbit/async-delay-planner?branch=master)
+
 # async-delay-planner
 A module for planning delays for a series of function runs
 
