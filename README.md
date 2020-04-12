@@ -23,8 +23,9 @@ The aim of the package is to let you add a delay before the function body so it 
 It is guaranteed that you will not go beyond the time limits between two runs of the function.
 
 # installation
-TODO
+run `npm i async-delay-planner`
 
+require:
 ```
 const Planner = require('async-delay-planner');
 ```
