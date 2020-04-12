@@ -1,6 +1,6 @@
 {
   "name": "async-delay-planner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A module for planning delay for a series of function runs",
   "main": "index.js",
   "scripts": {
