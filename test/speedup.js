@@ -26,7 +26,7 @@ describe("Speedup Test", () => {
                 let expectedMax = (i + 1) * INTERVAL;
                 if (expectedMax > THRESHOLD) expectedMax = (expectedMax - THRESHOLD) / SPEEDUP + THRESHOLD;
 
-                expect(timeLast).to.be.gte(expectedMin);
+                expect(timeLast).to.be.gte(expectedMin - 2);
                 expect(timeLast).to.be.lte(expectedMax);
                 if (i === RUN_COUNT) done();
             })();
