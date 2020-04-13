@@ -9,10 +9,10 @@ class Planner {
         this.delay = parseInt(delay);
         this.threshold = parseInt(threshold);
         this.speedup = parseFloat(speedup);
+        this.timestamp = 0;
         if (this.threshold !== 0 && this.speedup === 0) {
             throw new Error('Speedup can\'t be 0 if threshold isn\'t');
         }
-        this.timestamp = 0;
     }
 
     /**
@@ -24,7 +24,7 @@ class Planner {
         if (now < this.timestamp + this.delay) {
             this.timestamp += this.delay;
             let delay = this.timestamp - now;
-            if (this.threshold && delay > this.threshold) {
+            if (this.speedup && this.threshold && delay > this.threshold) {
                 // speedup
                 delay = (delay - this.threshold) / this.speedup + this.threshold;
             }

@@ -10,15 +10,21 @@ describe("General Test", () => {
     });
 
     it(`no error if threshold is 0 and speedup is 0`, () => {
-        expect(() => new Planner(INTERVAL, 0, 0)).not.to.throw(SPEEDUP_ERROR_MESSAGE);
+        let planner;
+        expect(() => planner = new Planner(INTERVAL, 0, 0)).not.to.throw(SPEEDUP_ERROR_MESSAGE);
+        expect(() => planner.hold()).not.to.throw();
     });
 
     it(`no error if threshold is 0 and speedup isn't 0`, () => {
-        expect(() => new Planner(INTERVAL, 0, 2)).not.to.throw(SPEEDUP_ERROR_MESSAGE);
+        let planner;
+        expect(() => planner = new Planner(INTERVAL, 0, 2)).not.to.throw(SPEEDUP_ERROR_MESSAGE);
+        expect(() => planner.hold()).not.to.throw();
     });
 
     it(`no error if threshold isn't 0 and speedup isn't 0`, () => {
-        expect(() => new Planner(INTERVAL, 3000, 2)).not.to.throw(SPEEDUP_ERROR_MESSAGE);
+        let planner;
+        expect(() => planner = new Planner(INTERVAL, 3000, 2)).not.to.throw(SPEEDUP_ERROR_MESSAGE);
+        expect(() => planner.hold()).not.to.throw();
     });
 
     it(`check return types`, () => {
