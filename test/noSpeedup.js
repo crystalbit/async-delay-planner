@@ -21,8 +21,4 @@ describe("No Speedup Test", () => {
             })();
         }
     }).timeout(0);
-
-    it(`throws error if threshold over 0 and speed up eq to 0`, () => {
-        expect(() => new Planner(INTERVAL, 1000, 0)).to.throw('Speedup can\'t be 0 if threshold isn\'t');
-    });
 });
