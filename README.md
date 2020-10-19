@@ -3,6 +3,11 @@
 # async-delay-planner
 A module for planning delays for a series of function runs
 
+Version 2 now has breaking changes:
+- no speedup as was in version 1;
+- default threshold is Infinity, 0 isn't interpreted as "no threshold";
+- if possible delay is over threshold, function hold promise rejects.
+
 # aim
 Imagine we have a function which is limited to have minimum intervals between each next run (e.g. API endpoint which can be touched max. 15 times a second, so the min. interval is 1/15 s).
 
@@ -31,14 +36,14 @@ const Planner = require('async-delay-planner');
 ```
 
 # example
-## 1) simple (without speedup)
+## 1) simple
 
 Let's init the planner:
 ```js
-const planner = new Planner(1000, 0, 0);
+const planner = new Planner(1000);
 ```
 
-We told the planner we have no speedup and the interval is 1000 ms.
+We told the planner we have no threshold and the interval is 1000 ms.
 
 And modify the function:
 
@@ -57,12 +62,12 @@ If the second run doesn't follow the first immediately, but for example after 20
 
 `hold()` just returns a Promise that resolves when time comes, so also feel free to use it without async/await.
 
-## 2) with speedup
-Speedup means that you define a threshold in ms. If the function has to be planned to run later than the threshold, the time periods over the threshold are divided by the speedup value.
+## 2) with threshold
+You define a threshold in ms. If the function has to be planned to run later than the threshold, the hold() function fails (the returned promise is rejected).
 
 For example:
 ```js
-const planner = new Planner(1000, 5000, 4);
+const planner = new Planner(1000, 5000);
 ```
 
 In this case if we run 10 functions one after another, they will execute:
@@ -71,16 +76,16 @@ In this case if we run 10 functions one after another, they will execute:
 * 2000 ms after the first,
 * 3000 ms after the first,
 * 4000 ms after the first,
-* 5000 ms after the first,
-* 5250 ms after the first (threshold! intervals over it are 4 times less, 1000 ms / 4 = 250 ms),
-* 5500 ms after the first,
-* 5750 ms after the first,
-* 6000 ms after the first.
+* immediately fail,
+* immediately fail,
+* immediately fail,
+* immediately fail,
+* immediately fail.
 
 # tests
 Yes, there are tests for all the cases, you can take a look if you want examples.
 
 Run:
 ```
-npm run test
+npm test
 ```
